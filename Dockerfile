@@ -11,10 +11,10 @@ RUN apt-get update -y\
     && apt-get install -y libmagick++-dev
 
 ## run git cloning
-RUN git clone https://github.com/Sage-Bionetworks/psorcast-validation-analysis.git /root/psorcast-validation-analysis
+RUN git clone https://github.com/Sage-Bionetworks/psorcast-validation-manuscript.git /root/psorcast-validation-manuscript
 
 ## change work dir
-WORKDIR /root/psorcast-validation-analysis
+WORKDIR /root/psorcast-validation-manuscript
 
 ## python dependencies
 RUN bash init_py_env.sh
