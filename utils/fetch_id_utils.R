@@ -19,8 +19,10 @@ get_feature_extraction_id <- function(data,
     return(subset)
 }
 
+project_id <- synFindEntityId(
+    yaml::read_yaml("synapseformation/manuscript.yaml")[[1]]$name)
 file_view_id <- synapser::synFindEntityId(
-    "Psorcast Manuscript - File View", "syn26840742")
+    "Psorcast Manuscript - File View", project_id)
 tbl_df <- synTableQuery(
     glue::glue("SELECT * FROM {file_view_id}"))$asDataFrame()
 
