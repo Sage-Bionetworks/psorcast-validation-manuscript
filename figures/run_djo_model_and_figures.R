@@ -1105,11 +1105,7 @@ synapser::synStore(file, activity = activity)
 unlink(figpath)
 
 ## Figure S12
-cor.test(dat1$age, dat1$total_rotation)
-cor.test(dat1$total_rotation, as.numeric(dat1$sex))
-cor.test(dat1$total_rotation, as.numeric(dat1$site))
 cor.lim <- c(-1, 1)
-
 figpath <- "Figure_S12.png"
 png(figpath, width = 1000, 
     height = 700, res = 100)
