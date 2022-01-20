@@ -13,6 +13,7 @@ project:
 manuscript_rerun:
 	Rscript feature_extraction/PPACMAN_features.R || exit 1
 	Rscript feature_extraction/get_visit_summary.R || exit 1
+	sleep 5s
 	Rscript feature_extraction/psoriasis_draw_bsa_features.R || exit 1
 	Rscript feature_extraction/digitalJarOpen_rotation_features.R || exit 1
 	Rscript feature_extraction/jointSummaries_features.R || exit 1
@@ -22,4 +23,5 @@ manuscript_rerun:
 	Rscript analysis/get_joint_summary.R || exit 1
 	Rscript figures/plot_bland_altman_figures.R || exit 1
 	Rscript figures/run_djo_model_and_figures.R || exit 1
+	sleep 5s
 	Rscript figures/plot_djo_boxplot_prediction.R || exit 1
