@@ -13,9 +13,9 @@ library(tidyverse)
 library(ggplot2)
 library(jsonlite)
 library(githubr)
-source("manuscript/utils/feature_extraction_utils.R")
-source("manuscript/utils/fetch_id_utils.R")
-source('manuscript/utils/helper_utils.R')
+source("utils/feature_extraction_utils.R")
+source("utils/fetch_id_utils.R")
+source('utils/helper_utils.R')
 synapser::synLogin()
 
 
@@ -34,7 +34,6 @@ OUTPUT_FILE <- "joint_counts_comparison.tsv"
 # Global Vars
 ############################
 SCRIPT_PATH <- file.path(
-    'manuscript',
     'analysis',
     'gs_vs_dig_jc_comparison.R')
 GIT_URL <- get_github_url(

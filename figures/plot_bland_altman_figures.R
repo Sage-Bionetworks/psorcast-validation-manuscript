@@ -13,9 +13,9 @@ library(ggExtra)
 library(ggpubr)
 library(data.table)
 library(DescTools)
-source("manuscript/utils/fetch_id_utils.R")
-source("manuscript/utils/feature_extraction_utils.R")
-source("manuscript/utils/helper_utils.R")
+source("utils/fetch_id_utils.R")
+source("utils/feature_extraction_utils.R")
+source("utils/helper_utils.R")
 synLogin()
 
 # get merged features
@@ -43,7 +43,7 @@ OUTPUT_REF <- list(
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
     git_repo = config::get("git")$repo,
-    script_path = "manuscript/figures/plot_bland_altman_figures.R",
+    script_path = "figures/plot_bland_altman_figures.R",
     ref="branch", 
     refName='main'
 )

@@ -11,8 +11,8 @@ library(synapser)
 library(tidyverse)
 library(data.table)
 library(githubr)
-source("manuscript/utils/fetch_id_utils.R")
-source('manuscript/utils/helper_utils.R')
+source("utils/fetch_id_utils.R")
+source('utils/helper_utils.R')
 
 synapser::synLogin()
 
@@ -30,8 +30,7 @@ OUTPUT_FILENAME <- list(
 ############################
 # Git Reference
 ############################
-SCRIPT_PATH <- file.path('manuscript',
-                         'analysis',
+SCRIPT_PATH <- file.path('analysis',
                          'curate_djo_features.R')
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,

@@ -25,9 +25,9 @@ library(purrr)
 library(githubr)
 library(readr)
 library(data.table)
-source("manuscript/utils/feature_extraction_utils.R")
-source('manuscript/utils/helper_utils.R')
-source("manuscript/utils/fetch_id_utils.R")
+source("utils/feature_extraction_utils.R")
+source('utils/helper_utils.R')
+source("utils/fetch_id_utils.R")
 
 synapser::synLogin()
 
@@ -56,7 +56,6 @@ BELOW_WAIST_BACK_WEIGHT <- 25.7953965305613/100
 # Outputs
 ##############################
 SCRIPT_PATH <- file.path(
-    'manuscript',
     'feature_extraction', 
     "psoriasis_draw_bsa_features.R")
 GIT_URL <- get_github_url(

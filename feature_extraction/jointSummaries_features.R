@@ -16,9 +16,9 @@ library(synapser)
 library(data.table)
 library(tidyverse)
 library(githubr)
-source("manuscript/utils/feature_extraction_utils.R")
-source("manuscript/utils/fetch_id_utils.R")
-source("manuscript/utils/helper_utils.R")
+source("utils/feature_extraction_utils.R")
+source("utils/fetch_id_utils.R")
+source("utils/helper_utils.R")
 synLogin()
 
 ############################
@@ -57,7 +57,6 @@ JOINT_TBL_REF <- list(
 ############################
 # Github link
 SCRIPT_PATH <- file.path(
-    'manuscript',
     'feature_extraction', 
     "jointSummaries_features.R")
 GIT_URL <- get_github_url(

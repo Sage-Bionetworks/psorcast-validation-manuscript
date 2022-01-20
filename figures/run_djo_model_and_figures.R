@@ -8,9 +8,9 @@ library(PRROC)
 library(ppcor)
 library(synapser)
 library(ROCit)
-source("manuscript/utils/fetch_id_utils.R")
-source("manuscript/utils/feature_extraction_utils.R")
-source("manuscript/utils/helper_utils.R")
+source("utils/fetch_id_utils.R")
+source("utils/feature_extraction_utils.R")
+source("utils/helper_utils.R")
 synLogin()
 
 FIGURES_PARENT_ID <- SYN_ID_REF$figures$parent
@@ -19,7 +19,7 @@ DJO_CURATED_FEATURES <- SYN_ID_REF$curated_features$curated_djo
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
     git_repo = config::get("git")$repo,
-    script_path = "manuscript/figures/run_djo_model_and_figures.R",
+    script_path = "figures/run_djo_model_and_figures.R",
     ref="branch", 
     refName='main'
 )

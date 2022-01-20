@@ -16,9 +16,9 @@ library(data.table)
 library(tidyr)
 library(plyr)
 library(dplyr)
-source("manuscript/utils/feature_extraction_utils.R")
-source('manuscript/utils/helper_utils.R')
-source("manuscript/utils/fetch_id_utils.R")
+source("utils/feature_extraction_utils.R")
+source('utils/helper_utils.R')
+source("utils/fetch_id_utils.R")
 
 
 synapser::synLogin()
@@ -30,7 +30,6 @@ OUTPUT_FILE <- 'PPACMAN_assessor_features.tsv' # name your file
 
 # Github link
 SCRIPT_PATH <- file.path(
-    'manuscript',
     'feature_extraction', 
     "PPACMAN_features.R")
 GIT_URL <- get_github_url(

@@ -22,9 +22,9 @@ library(data.table)
 library(tidyverse)
 library(githubr)
 library(config)
-source("manuscript/utils/feature_extraction_utils.R")
-source('manuscript/utils/helper_utils.R')
-source('manuscript/utils/fetch_id_utils.R')
+source("utils/feature_extraction_utils.R")
+source('utils/helper_utils.R')
+source('utils/fetch_id_utils.R')
 synLogin()
 
 ############################
@@ -50,7 +50,6 @@ FEATURES_ID <- list(
 # Git Reference
 ############################
 SCRIPT_PATH <- file.path(
-    'manuscript',
     'feature_extraction', 
     "psorcast_merged_features.R")
 GIT_URL <- get_github_url(
