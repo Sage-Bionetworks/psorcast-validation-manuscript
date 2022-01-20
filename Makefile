@@ -6,6 +6,9 @@ update:
 
 logs:
 	mkdir logs
+	
+project:
+	. env/bin/activate && python3 synapseformation/create_project.py
 
 manuscript_rerun:
 	Rscript feature_extraction/PPACMAN_features.R || exit 1

@@ -6,17 +6,8 @@ and the wiki id of the dashboard to copy
 
 Author: aryton.tediarjo@sagebase.org
 """
-"""
-This script is used for copying stats wiki of a digital health study
-it will prompt user target id (which health summary to build dashboard on),
-and the desired synapseformation template,
-and the wiki id of the dashboard to copy
-
-Author: aryton.tediarjo@sagebase.org
-"""
 import sys
 import pandas as pd
-import numpy as np
 import logging
 import argparse
 from yaml import safe_load
@@ -26,7 +17,7 @@ import synapseutils
 from synapseclient import File, EntityViewSchema, Column, EntityViewType
 from synapseformation import client as synapseformation_client
 
-TEMPLATE_PATH = "manuscript.yaml"
+TEMPLATE_PATH = "synapseformation/manuscript.yaml"
 
 syn = synapseclient.login()
 logging.basicConfig()
@@ -60,7 +51,7 @@ def create_file_view(project_id):
         name="Psorcast Manuscript - File View",
         columns=[Column(name="task",
                         columnType="STRING",
-                        maximumSize=10),
+                        maximumSize=30),
                  Column(name="analysisType",
                         columnType="STRING",
                         maximumSize=30),
@@ -68,7 +59,7 @@ def create_file_view(project_id):
                         columnType="STRING"),
                  Column(name="pipelineStep",
                         columnType="STRING",
-                        maximumSize=22),
+                        maximumSize=30),
                  Column(name="consortium",
                         columnType="STRING",
                         maximumSize=10),

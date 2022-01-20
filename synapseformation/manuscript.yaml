@@ -18,3 +18,10 @@
     type: Folder
   - name: Intermediate Files
     type: Folder
+    children:
+      - name: Curated Features
+        type: Folder
+      - name: Model Performance
+        type: Folder
+  - name: Removed Data Log
+    type: Folder
