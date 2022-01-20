@@ -1,6 +1,6 @@
 default:
     git:
-        repo: "arytontediarjo/psorcast-validation-analysis"
+        repo: "arytontediarjo/psorcast-validation-manuscript"
         token_path: "~/git_token.txt"
     tables:
         ppacman_assessor: 'syn25006883'
