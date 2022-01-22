@@ -18,11 +18,13 @@ get_feature_extraction_id <- function(data,
 }
 
 
-
 project_id <- synFindEntityId(
     yaml::read_yaml("synapseformation/manuscript.yaml")[[1]]$name)
 file_view_id <- synapser::synFindEntityId(
     "Psorcast Manuscript - File View", project_id)
+
+# add 300 seconds wait for index to run
+Sys.sleep(300)
 tbl_df <- synTableQuery(
     glue::glue("SELECT * FROM {file_view_id}"))$asDataFrame()
 
