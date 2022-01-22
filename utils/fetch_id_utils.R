@@ -19,7 +19,6 @@ get_feature_extraction_id <- function(data,
 
 
 
-Sys.sleep(60)
 project_id <- synFindEntityId(
     yaml::read_yaml("synapseformation/manuscript.yaml")[[1]]$name)
 file_view_id <- synapser::synFindEntityId(

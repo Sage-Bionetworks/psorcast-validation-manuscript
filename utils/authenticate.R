@@ -1,7 +1,6 @@
 library(synapser)
 library(optparse)
 
-
 #' Option parser 
 option_list <- list(
     make_option(c("-u", "--username"),
