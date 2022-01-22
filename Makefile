@@ -17,14 +17,15 @@ clinical:
 	Rscript feature_extraction/get_visit_summary.R || exit 1
 	
 features:
-	sleep 600s
+	sleep 300s
 	Rscript feature_extraction/psoriasis_draw_bsa_features.R || exit 1
 	Rscript feature_extraction/digitalJarOpen_rotation_features.R || exit 1
 	Rscript feature_extraction/jointSummaries_features.R || exit 1
 	
 merge:
-	sleep 600s
+	sleep 300s
 	Rscript feature_extraction/psorcast_merged_features.R || exit 1
+	sleep 300s
 
 analysis:
 	Rscript analysis/curate_djo_features.R || exit 1
@@ -33,4 +34,5 @@ analysis:
 figures:
 	Rscript figures/plot_bland_altman_figures.R || exit 1
 	Rscript figures/run_djo_model_and_figures.R || exit 1
+	sleep 300s
 	Rscript figures/plot_djo_boxplot_prediction.R || exit 1
