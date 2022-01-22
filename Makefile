@@ -1,5 +1,4 @@
-all:
-	update logs manuscript_rerun
+rerun: clinical features analysis figures
 
 update:
 	git pull
@@ -31,10 +30,6 @@ figures:
 	Rscript figures/plot_bland_altman_figures.R || exit 1
 	Rscript figures/run_djo_model_and_figures.R || exit 1
 	Rscript figures/plot_djo_boxplot_prediction.R || exit 1
-	
-rerun:
-	clinical features analysis figures
-
 
 
 	
