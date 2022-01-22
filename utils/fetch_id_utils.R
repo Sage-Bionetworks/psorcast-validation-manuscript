@@ -1,9 +1,7 @@
 library(synapser)
 library(data.table)
 library(tidyverse)
-
 synapser::synLogin()
-
 
 get_feature_extraction_id <- function(data, 
                                       analysis_type,
@@ -19,6 +17,9 @@ get_feature_extraction_id <- function(data,
     return(subset)
 }
 
+
+
+Sys.sleep(120)
 project_id <- synFindEntityId(
     yaml::read_yaml("synapseformation/manuscript.yaml")[[1]]$name)
 file_view_id <- synapser::synFindEntityId(
