@@ -17,15 +17,14 @@ clinical:
 	Rscript feature_extraction/get_visit_summary.R || exit 1
 	
 features:
-	sleep 10 && Rscript feature_extraction/psoriasis_draw_bsa_features.R || exit 1
+	Rscript feature_extraction/psoriasis_draw_bsa_features.R || exit 1
 	Rscript feature_extraction/digitalJarOpen_rotation_features.R || exit 1
 	Rscript feature_extraction/jointSummaries_features.R || exit 1
 	
-merge:
-	sleep 10 && Rscript feature_extraction/psorcast_merged_features.R || exit 1
 
-analysis:
-	sleep 10 && Rscript analysis/curate_djo_features.R || exit 1
+analyses:
+	Rscript analysis/psorcast_merged_features.R || exit 1
+	Rscript analysis/curate_djo_features.R || exit 1
 	Rscript analysis/gs_vs_dig_jc_comparison.R || exit 1
 
 figures:

@@ -3,111 +3,131 @@ library(data.table)
 library(tidyverse)
 synapser::synLogin()
 
-get_feature_extraction_id <- function(data, 
-                                      analysis_type,
-                                      task_type = NULL){
-    subset <- data %>% 
-        dplyr::filter(
-            analysisType == analysis_type,
-            pipelineStep == "feature extraction")
-    if(!is.null(task_type)){
-        subset <- subset %>% 
-            dplyr::filter(task == task_type)
-    }
-    return(subset)
-}
 
-
-get_file_view_table <- function(){
+get_file_view_ref <- function(){
     project_id <- synFindEntityId(
         yaml::read_yaml("synapseformation/manuscript.yaml")[[1]]$name)
     file_view_id <- synapser::synFindEntityId(
         "Psorcast Manuscript - File View", project_id)
-    Sys.sleep(60)
-    return(
-        synTableQuery(
-            glue::glue("SELECT * FROM {file_view_id}"))$asDataFrame()
-    )
+    return(file_view_id)
 }
 
-build_syn_id_ref <- function(tbl_df){
-    SYN_ID_REF <- list()
-    SYN_ID_REF$removed_data <- list(
-        parent_id = tbl_df %>% 
-            dplyr::filter(type == "folder", 
-                          name== "Removed Data Log") %>% 
-            .$id
-    )
-    SYN_ID_REF$feature_extraction <- list(
-        parent_id = tbl_df %>% 
-            dplyr::filter(type == "folder", 
-                          name== "Features") %>% 
-            .$id,
-        ppacman = get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "clinical data") %>% .$id,
-        visit_summary =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "visit summary") %>% .$id,
-        djo =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "digital jar open") %>% .$id,
-        draw =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "psoriasis draw") %>% .$id,
-        dig_jc =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "joint counts analysis",
-            task_type = "digital joint count") %>% .$id,
-        gs_jc =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "joint counts analysis",
-            task_type = "gold-standard joint count") %>% .$id,
-        gs_js =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "joint counts analysis",
-            task_type = "gold-standard joint swell") %>% .$id,
-        merged =  get_feature_extraction_id(
-            tbl_df, 
-            analysis_type = "merged feature files") %>% .$id
-    )
-    
-    SYN_ID_REF$curated_features <- list(
-        parent = tbl_df %>% 
-            dplyr::filter(type == "folder",
-                          name == "Curated Features") %>% .$id,
-        curated_djo = tbl_df %>% 
-            dplyr::filter(analysisType == "digital jar open",
-                          pipelineStep == "feature curation") %>% .$id
-    )
-    
-    
-    SYN_ID_REF$model_performance <- list(
-        parent = tbl_df %>% 
+get_removed_log_ids <- function(){
+    file_view_id <- get_file_view_ref()
+    ref_list <- list()
+    data <- synTableQuery(
+        glue::glue("SELECT * FROM {file_view_id}", 
+                   file_view_id = file_view_id))$asDataFrame() %>%
+        tibble::as_tibble()
+    ref_list$parent_id <- data %>%
+        dplyr::filter(type == "folder",
+                      name == "Removed Data Log") %>% .$id
+    return(ref_list)
+}
+
+get_feature_extraction_ids <- function(){
+    file_view_id <- get_file_view_ref()
+    ref_list <- list()
+    data <- synTableQuery(
+        glue::glue("SELECT * FROM {file_view_id}", 
+                   file_view_id = file_view_id))$asDataFrame() %>%
+        tibble::as_tibble()
+    ref_list$parent_id <- data %>%
+        dplyr::filter(type == "folder",
+                      name == "Features") %>% .$id
+    ref_list$ppacman <- data %>% 
+        dplyr::filter(
+            analysisType == "clinical data",
+            pipelineStep == "feature extraction") %>% .$id
+    ref_list$visit_summary =  data %>% 
+        dplyr::filter(
+            analysisType == "visit summary",
+            pipelineStep == "feature extraction") %>% .$id
+    ref_list$djo <-  data %>% 
+        dplyr::filter(
+            analysisType == "digital jar open",
+            pipelineStep == "feature extraction") %>% .$id
+    ref_list$draw <- data %>% 
+        dplyr::filter(
+            analysisType == "psoriasis draw",
+            pipelineStep == "feature extraction") %>% .$id
+    ref_list$dig_jc <-  data %>% 
+        dplyr::filter(
+            analysisType == "joint counts analysis",
+            pipelineStep == "feature extraction",
+            task == "digital joint count") %>% .$id
+    ref_list$gs_jc <-  data %>% 
+        dplyr::filter(
+            analysisType == "joint counts analysis",
+            pipelineStep == "feature extraction",
+            task == "gold-standard joint count") %>% .$id
+    ref_list$gs_js <-  data %>% 
+        dplyr::filter(
+            analysisType == "joint counts analysis",
+            pipelineStep == "feature extraction",
+            task == "gold-standard joint swell") %>% .$id
+    return(ref_list)
+}
+
+
+get_curated_features_ids <- function(){
+    file_view_id <- get_file_view_ref()
+    ref_list <- list()
+    data <- synTableQuery(
+        glue::glue("SELECT * FROM {file_view_id}", 
+                   file_view_id = file_view_id))$asDataFrame() %>%
+        tibble::as_tibble()
+    ref_list$parent_id <- data %>%
+        dplyr::filter(type == "folder",
+                      name == "Curated Features") %>% .$id
+    ref_list$merged <- data %>%
+        dplyr::filter(analysisType == "merged feature files",
+                      pipelineStep == "feature curation") %>% .$id
+    ref_list$curated_djo <- data %>% 
+        dplyr::filter(analysisType == "digital jar open",
+                      pipelineStep == "feature curation") %>% .$id
+    return(ref_list)
+}
+
+get_modelling_results_ids <- function(){
+    file_view_id <- get_file_view_ref()
+    data <- synTableQuery(
+        glue::glue("SELECT * FROM {file_view_id}", 
+                   file_view_id = file_view_id))$asDataFrame() %>%
+        tibble::as_tibble()
+    ref_list <- list(
+        parent_id = data %>% 
             dplyr::filter(type == "folder",
                           name == "Model Performance") %>% .$id,
-        psa_pso_md_fpr_tpr = tbl_df %>% 
+        psa_pso_md_fpr_tpr = data %>% 
             dplyr::filter(analysisType == "digital jar open",
                           analysisSubtype == "psa vs pso - median iter",
                           pipelineStep == "prediction") %>% .$id,
-        psa_pso_auc_iter = tbl_df %>% 
+        psa_pso_auc_iter = data %>% 
             dplyr::filter(analysisType == "digital jar open",
                           analysisSubtype == "psa vs pso - auc iter",
                           pipelineStep == "prediction") %>% .$id,
-        uei_pso_md_fpr_tpr = tbl_df %>% 
+        uei_pso_md_fpr_tpr = data %>% 
             dplyr::filter(analysisType == "digital jar open",
                           analysisSubtype == "uei - median iter",
                           pipelineStep == "prediction") %>% .$id,
-        uei_pso_auc_iter = tbl_df %>% 
+        uei_pso_auc_iter = data %>% 
             dplyr::filter(analysisType == "digital jar open",
                           analysisSubtype == "uei - auc iter",
                           pipelineStep == "prediction") %>% .$id
     )
-    
-    SYN_ID_REF$figures <- list(
-        parent = tbl_df %>% 
+}
+
+
+get_figures_ids <- function(){
+    file_view_id <- get_file_view_ref()
+    data <- synTableQuery(
+        glue::glue("SELECT * FROM {file_view_id}", 
+                   file_view_id = file_view_id))$asDataFrame() %>%
+        tibble::as_tibble()
+    ref_list <- list(
+        parent_id = data %>% 
             dplyr::filter(type == "folder",
                           name == "Figures") %>% .$id
     )
-    return(SYN_ID_REF)
 }

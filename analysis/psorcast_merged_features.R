@@ -30,15 +30,17 @@ synLogin()
 ############################
 # Global Vars
 ############################
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    feature_extraction = get_feature_extraction_ids(),
+    curated_features = get_curated_features_ids())
 OUTPUT_REF <- list(
     merged_file = "psorcast_merged_features.tsv",
     removed_records = "error_log_psorcast_merged_features.tsv")
 PARENT_REF <- list(
-    merged_file = SYN_ID_REF$feature_extraction$parent_id,
+    merged_file = SYN_ID_REF$curated_features$parent_id,
     removed_records = SYN_ID_REF$removed_data$parent_id)
 PPACMAN_TBL_ID <- SYN_ID_REF$feature_extraction$ppacman
-PARENT_SYN_ID <- SYN_ID_REF$feature_extraction$parent_id
 FEATURES_ID <- list(
     djo = SYN_ID_REF$feature_extraction$djo,
     dig_jc = SYN_ID_REF$feature_extraction$dig_jc,
@@ -51,8 +53,8 @@ FEATURES_ID <- list(
 # Git Reference
 ############################
 SCRIPT_PATH <- file.path(
-    'feature_extraction', 
-    "psorcast_merged_features.R")
+    'analysis', 
+    'psorcast_merged_features.R')
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
     git_repo = config::get("git")$repo,

@@ -24,7 +24,9 @@ source("utils/fetch_id_utils.R")
 synapser::synLogin()
 
 # output reference
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    feature_extraction = get_feature_extraction_ids())
 PPACMAN_SYN_ID <- config::get("tables")$ppacman
 PARENT_SYN_ID <- SYN_ID_REF$feature_extraction$parent_id # synId of folder to upload your file to
 OUTPUT_FILE <- 'PPACMAN_assessor_features.tsv' # name your file

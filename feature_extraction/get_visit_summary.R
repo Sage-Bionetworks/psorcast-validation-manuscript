@@ -29,7 +29,9 @@ synapser::synLogin()
 ####################
 # Global Variables
 ####################
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    feature_extraction = get_feature_extraction_ids())
 PARENT_SYN_ID <- SYN_ID_REF$feature_extraction$parent_id
 ERROR_LOG_SYN_ID <- SYN_ID_REF$removed_data$parent_id
 TIME_THRESH <- lubridate::ddays(30)
