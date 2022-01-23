@@ -33,7 +33,7 @@ Adding these 4 annotations to each of the files, will keep track data locations 
 
 Click [here](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/docs/ANNOTATIONS.md) for current available annotations.
 
-**Note: Make sure to add [Synapse Annotations](https://python-docs.synapse.org/build/html/Annotations.html) to new file entities and make changes to [docs/ANNOTATIONS.md](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/docs/ANNOTATIONS.md) as part of the Github PR.
+**Note: Make sure to add [Synapse Annotations](https://python-docs.synapse.org/build/html/Annotations.html) to new file entities and make changes to [docs/ANNOTATIONS.md](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/docs/ANNOTATIONS.md) as part of the Github PR.**
 
 ### Fetching File IDs:
 To fetch fileIDs, check [utils/fetch_id_utils.R](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/utils/fetch_id_utils.R). The script contains function that can fetch each and every part of the analysis. Edit the file with new function, or new annotations for adding new analysis.
