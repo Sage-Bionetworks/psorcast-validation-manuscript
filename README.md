@@ -1,4 +1,4 @@
-# psorcast-validation-manuscript
+# Psorcast Validation Manuscript
 Github Repository for Rerunning Psorcast In-Clinic Validation Manuscript
 
 
@@ -29,8 +29,9 @@ docker ps -a
 ```
 #### Fetch container ID and create Synapse Authentication:
 ```zsh
-docker exec -it <CONTAINER_ID> make authenticate "--bla bla"
+docker exec -it <CONTAINER_ID> make authenticate "-u <username> -p <password> -g <git_token>"
 ```
+
 
 #### Use same container ID and use Makefile to rerun workflow:
 ```zsh
