@@ -2,7 +2,7 @@
 
 To contribute to this analysis workflow, please for this repository and create PR for any new changes made to the analysis.
 
-### Fork and clone this repository
+## Fork and clone this repository
 See the [Github docs](https://help.github.com/articles/fork-a-repo/) for how to make a copy (a fork) of a repository to your own Github account.
 
 Then, [clone the repository](https://help.github.com/articles/cloning-a-repository/) to your local machine so you can begin making changes.
@@ -16,21 +16,29 @@ git checkout develop
 git pull upstream develop
 ```
 
-### Life Cycle
+## Life Cycle
+### File Annotations Guide
+This analysis workflow uses Synapse Annotations and File View to control the I/O of the analysis (parentIds, fileIds etc). 
 
-#### File Annotations Guide
-This analysis workflow uses Synapse Annotations and File View to control the I/O of the analysis (parentIds, fileIds etc). There are several working components in which files are queried based on their annotations.
+
+There are several working components in which files are queried based on their annotations.
+
+
 - pipelineStep: which pipeline step it is (feature extraction, curation analysis, etc.)
 - analysisType: which analysis does the script belongs to
 - analysisSubtype: subset of the analysis Type
 - task: tasks done corresponding to the analysis
-Adding these 4 annotations to each of the files, will help keep track data location. 
 
-Check here for current available annotations.
+Adding these 4 annotations to each of the files, will keep track data locations in Synapse
 
-#### Fetching File IDs:
+Click [here](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/docs/ANNOTATIONS.md) for current available annotations.
+
+**Note: Make sure to add [Synapse Annotations] (https://python-docs.synapse.org/build/html/Annotations.html) to the file entity and do PR towards `docs/ANNOTATIONS.md` to help keep track current annotation usage.**
+
+### Fetching File IDs:
 To fetch fileIDs, check [utils/fetch_id_utils.R](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/utils/fetch_id_utils.R). The script contains function that can fetch each and every part of the analysis. Edit the file with new function, or new annotations for adding new analysis.
 
-#### Adding Workflow to Makefile
+### Adding Workflow to Makefile
 Workflow is streamlined by [GNU Makefile](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/Makefile), to add new workflow into the analysis, create/edit rules inside the [Makefile](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/blob/main/Makefile)
+
 
