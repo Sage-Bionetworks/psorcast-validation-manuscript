@@ -14,11 +14,11 @@ git clone https://github.com/Sage-Bionetworks/psorcast-validation-manuscript.git
 ```
 ### 2. Build Image:
 ```zsh
-docker build -t <IMAGE_NAME> .
+docker build -t 'psorcast-manuscript' .
 ```
 ### 3. Run Image as Container:
 ```zsh
-docker run -itd <IMAGE_NAME>
+docker run -itd psorcast-manuscript
 ```
 Notes: Argument -itd is used to make sure that container is run in detached mode (not removed after running once)
 
@@ -27,6 +27,8 @@ Notes: Argument -itd is used to make sure that container is run in detached mode
 ```zsh
 docker ps -a
 ```
+Using this command, it will output container that contains the saved image. Fetch the container ID to proceed.
+
 #### Fetch container ID and create Synapse Authentication:
 ```zsh
 docker exec -it <CONTAINER_ID> make authenticate PARAMS="-u <username> -p <password> -g <git_token>"
