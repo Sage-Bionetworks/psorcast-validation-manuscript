@@ -13,9 +13,13 @@ source("utils/feature_extraction_utils.R")
 source("utils/helper_utils.R")
 synLogin()
 
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
-FIGURES_PARENT_ID <- SYN_ID_REF$figures$parent
-MODEL_PARENT_ID <- SYN_ID_REF$model_performance$parent
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    curated_features = get_curated_features_ids(),
+    model_performance = get_modelling_results_ids(),
+    figures = get_figures_ids())
+FIGURES_PARENT_ID <- SYN_ID_REF$figures$parent_id
+MODEL_PARENT_ID <- SYN_ID_REF$model_performance$parent_id
 DJO_CURATED_FEATURES <- SYN_ID_REF$curated_features$curated_djo
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
@@ -1280,7 +1284,7 @@ png(figpath, width = 1000,
     height = 500, res = 100)
 par(mfrow = c(1, 2), mar = c(6, 4, 3, 1))
 boxplot(c1$pcors_c$age[, 1:5], 
-        color = "white",
+        col = "white",
         las = 2, ylab = "(partial) correlations",
         main = "UEI (adjusted)", 
         ylim = cor.lim, cex = 0.5)
@@ -1290,7 +1294,7 @@ mtext(side = 3, "(a)", at = 0.5, cex = lcex)
 aux.fig <- c2$pcors_c$age[, 1:5]
 colnames(aux.fig) <- c("cor(R,D)", "cor(R,C)", "cor(C,D)", "cor(R,D|C)", "cor(R,C|D)")
 boxplot(aux.fig,
-        color = "white",
+        col = "white",
         las = 2, 
         ylab = "(partial) correlations",
         main = "PsA-without-UEI (adjusted)", 
@@ -1469,4 +1473,5 @@ aux2b <- GetAdjustedAurocCI(dat = dat2,
 
 aux1b
 aux2b
+unlink("Rplots.pdf")
 

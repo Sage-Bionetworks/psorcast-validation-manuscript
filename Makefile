@@ -1,4 +1,4 @@
-rerun: update logs project clinical features merge analysis figures
+rerun: update logs project clinical features analyses plots
 
 update:
 	git pull
@@ -27,7 +27,7 @@ analyses:
 	Rscript analysis/curate_djo_features.R || exit 1
 	Rscript analysis/gs_vs_dig_jc_comparison.R || exit 1
 
-figures:
+plots:
 	Rscript figures/plot_bland_altman_figures.R || exit 1
 	Rscript figures/run_djo_model_and_figures.R || exit 1
 	Rscript figures/plot_djo_boxplot_prediction.R || exit 1

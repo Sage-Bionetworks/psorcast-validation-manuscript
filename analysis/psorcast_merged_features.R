@@ -109,7 +109,7 @@ main <- function(){
     synSetAnnotations(
         entity$properties$id,
         analysisType = "merged feature files",
-        pipelineStep = "feature extraction")
+        pipelineStep = "feature curation")
 }
 
 log_process(main(), SCRIPT_PATH)

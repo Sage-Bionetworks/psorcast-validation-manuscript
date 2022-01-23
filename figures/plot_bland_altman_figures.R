@@ -19,9 +19,12 @@ source("utils/helper_utils.R")
 synLogin()
 
 # get merged features
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
-MERGED_FEATURES <- SYN_ID_REF$feature_extraction$merged
-PARENT_ID <- SYN_ID_REF$figures$parent
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    curated_features = get_curated_features_ids(),
+    figures = get_figures_ids())
+MERGED_FEATURES <- SYN_ID_REF$curated_features$merged
+PARENT_ID <- SYN_ID_REF$figures$parent_id
 OUTPUT_REF <- list(
     draw = list(plot = NULL, 
                 output_file = "Figure_1B.png",

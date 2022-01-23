@@ -16,16 +16,20 @@ source("utils/helper_utils.R")
 synapser::synLogin()
 
 # get github url
-SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
+SYN_ID_REF <- list(
+    removed_data = get_removed_log_ids(),
+    curated_features = get_curated_features_ids(),
+    model_performance = get_modelling_results_ids(),
+    figures = get_figures_ids())
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
     git_repo = config::get("git")$repo,
-    script_path = "figures/plo_djo_boxplot_prediction.R",
+    script_path = "figures/plot_djo_boxplot_prediction.R",
     ref="branch", 
     refName='main')
 
 # get parent id reference
-PARENT_ID <- SYN_ID_REF$figures$parent
+PARENT_ID <- SYN_ID_REF$figures$parent_id
 
 # input reference
 INPUT_REF <- list(
