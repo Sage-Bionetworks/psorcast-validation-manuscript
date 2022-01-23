@@ -134,7 +134,7 @@ main <- function(){
     synSetAnnotations(
         entity$properties$id,
         analysisType = "joint counts analysis",
-        analysisSubtype = "Gold-Standard joint counts vs joint swelling",
+        analysisSubtype = "gold-Standard joint counts vs joint swelling",
         pipelineStep = "feature curation",
         task = "gold-standard joint count")
 }
