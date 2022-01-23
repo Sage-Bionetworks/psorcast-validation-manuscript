@@ -27,7 +27,12 @@ Notes: Argument -itd is used to make sure that container is run in detached mode
 ```zsh
 docker ps -a
 ```
-#### Fetch container ID and use it as the following parameter:
+#### Fetch container ID and create Synapse Authentication:
+```zsh
+docker exec -it <CONTAINER_ID> make authenticate "--bla bla"
+```
+
+#### Use same container ID and use Makefile to rerun workflow:
 ```zsh
 docker exec -it <CONTAINER_ID> make rerun
 ```
