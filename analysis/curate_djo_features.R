@@ -20,6 +20,7 @@ synapser::synLogin()
 ############################
 # Global Vars
 ############################
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 MERGED_FEATURES <- SYN_ID_REF$feature_extraction$merged
 PPACMAN_DATA <- config::get("tables")$ppacman_assessor
 PARENT_ID <- SYN_ID_REF$curated_features$parent

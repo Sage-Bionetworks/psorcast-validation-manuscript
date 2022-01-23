@@ -19,6 +19,7 @@ source("utils/helper_utils.R")
 synLogin()
 
 # get merged features
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 MERGED_FEATURES <- SYN_ID_REF$feature_extraction$merged
 PARENT_ID <- SYN_ID_REF$figures$parent
 OUTPUT_REF <- list(

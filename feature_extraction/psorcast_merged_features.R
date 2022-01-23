@@ -30,6 +30,7 @@ synLogin()
 ############################
 # Global Vars
 ############################
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 OUTPUT_REF <- list(
     merged_file = "psorcast_merged_features.tsv",
     removed_records = "error_log_psorcast_merged_features.tsv")

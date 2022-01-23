@@ -15,6 +15,7 @@ source("utils/helper_utils.R")
 synapser::synLogin()
 
 # get github url
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 GIT_URL <- get_github_url(
     git_token_path = config::get("git")$token_path,
     git_repo = config::get("git")$repo,

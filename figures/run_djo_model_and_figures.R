@@ -13,6 +13,7 @@ source("utils/feature_extraction_utils.R")
 source("utils/helper_utils.R")
 synLogin()
 
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 FIGURES_PARENT_ID <- SYN_ID_REF$figures$parent
 MODEL_PARENT_ID <- SYN_ID_REF$model_performance$parent
 DJO_CURATED_FEATURES <- SYN_ID_REF$curated_features$curated_djo

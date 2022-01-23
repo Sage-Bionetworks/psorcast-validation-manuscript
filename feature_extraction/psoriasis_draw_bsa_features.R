@@ -34,7 +34,7 @@ synapser::synLogin()
 ##############################
 # Global Variables
 ##############################
-## source table ids
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 PSORIASIS_DRAW_TBL_ID <- config::get("tables")$psoriasis_draw
 PPACMAN_TBL_ID <- SYN_ID_REF$feature_extraction$ppacman
 VISIT_REF_ID <- SYN_ID_REF$feature_extraction$visit_summary

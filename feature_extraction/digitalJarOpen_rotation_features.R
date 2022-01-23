@@ -23,6 +23,7 @@ source("utils/fetch_id_utils.R")
 synapser::synLogin()
 
 # source table ids
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 DIG_JAR_OPEN_TBL_ID <- config::get("tables")$jar_opener
 PPACMAN_TBL_ID <- SYN_ID_REF$feature_extraction$ppacman
 VISIT_REF_ID <- SYN_ID_REF$feature_extraction$visit_summary

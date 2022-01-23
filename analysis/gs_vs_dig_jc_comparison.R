@@ -22,6 +22,7 @@ synapser::synLogin()
 ############################
 # Global Vars
 ############################
+SYN_ID_REF <- get_file_view_table() %>% build_syn_id_ref()
 PARENT_SYN_ID <- SYN_ID_REF$curated_features$parent
 GS_JOINT_COUNT <- config::get("tables")$md_joint_counting
 DIG_JOINT_COUNT <- config::get("tables")$joint_counting
