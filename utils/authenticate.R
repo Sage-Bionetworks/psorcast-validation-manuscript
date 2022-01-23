@@ -38,7 +38,7 @@ write_synapse_config <- function(username = NULL,
 # Function to write to git token
 write_git_token <- function(token, path = "~/git_token.txt"){
     unlink(path)
-    token = paste0(token, "\n")
+    token = paste0(token)
     writeLines(token, path)
     paste0("Sucessfully written ~/git_token.txt")
 }
