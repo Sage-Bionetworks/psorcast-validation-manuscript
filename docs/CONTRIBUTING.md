@@ -17,6 +17,11 @@ git pull upstream develop
 ```
 
 ## Development Life Cycle
+To add an analysis into this repostiory and add it as part of the workflow, several steps are required
+1. Annotate each file accordingly
+2. Add query to `utils/fetch_file_id.R'
+3. Include as part of the target in the Makefile
+
 ### File Annotations Guide
 This analysis workflow uses Synapse Annotations and File View to control the I/O of the analysis (parentIds, fileIds etc). 
 
