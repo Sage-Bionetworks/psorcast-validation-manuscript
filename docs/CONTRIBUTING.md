@@ -16,7 +16,7 @@ git checkout develop
 git pull upstream develop
 ```
 
-## Life Cycle
+## Development Life Cycle
 ### File Annotations Guide
 This analysis workflow uses Synapse Annotations and File View to control the I/O of the analysis (parentIds, fileIds etc). 
 
