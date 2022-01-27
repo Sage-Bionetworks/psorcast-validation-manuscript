@@ -15,7 +15,7 @@ synLogin()
 
 SYN_ID_REF <- list(
     removed_data = get_removed_log_ids(),
-    curated_features = get_curated_features_ids(),
+    curated_features = get_feature_processing_ids(),
     model_performance = get_modelling_results_ids(),
     figures = get_figures_ids())
 FIGURES_PARENT_ID <- SYN_ID_REF$figures$parent_id

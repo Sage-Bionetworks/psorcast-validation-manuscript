@@ -33,7 +33,7 @@ synLogin()
 SYN_ID_REF <- list(
     removed_data = get_removed_log_ids(),
     feature_extraction = get_feature_extraction_ids(),
-    curated_features = get_curated_features_ids())
+    curated_features = get_feature_processing_ids())
 OUTPUT_REF <- list(
     merged_file = "psorcast_merged_features.tsv",
     removed_records = "error_log_psorcast_merged_features.tsv")

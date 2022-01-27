@@ -23,7 +23,7 @@ synapser::synLogin()
 SYN_ID_REF <- list(
     removed_data = get_removed_log_ids(),
     feature_extraction = get_feature_extraction_ids(),
-    curated_features = get_curated_features_ids())
+    curated_features = get_feature_processing_ids())
 MERGED_FEATURES <- SYN_ID_REF$curated_features$merged
 PPACMAN_DATA <- config::get("tables")$ppacman_assessor
 PARENT_ID <- SYN_ID_REF$curated_features$parent

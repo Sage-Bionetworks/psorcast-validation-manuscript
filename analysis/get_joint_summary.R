@@ -19,7 +19,7 @@ synapser::synLogin()
 SYN_ID_REF <- list(
     removed_data = get_removed_log_ids(),
     feature_extraction = get_feature_extraction_ids(),
-    curated_features = get_curated_features_ids())
+    curated_features = get_feature_processing_ids())
 PARENT_SYN_ID <- SYN_ID_REF$curated_features$parent
 GS_JOINT_COUNT <- config::get("tables")$md_joint_counting
 GS_JOINT_SWELL <- config::get("tables")$md_joint_swelling

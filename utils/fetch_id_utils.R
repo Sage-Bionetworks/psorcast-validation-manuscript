@@ -34,7 +34,13 @@ get_feature_extraction_ids <- function(){
         tibble::as_tibble()
     ref_list$parent_id <- data %>%
         dplyr::filter(type == "folder",
-                      name == "Features") %>% .$id
+                      name == "Features - Extracted") %>% .$id
+    ref_list$annotator_folder_id <- data %>%
+        dplyr::filter(type == "folder",
+                      name == "Psorcast Annotator Scores") %>% .$id
+    ref_list$pso_draw_folder_id <- data %>%
+        dplyr::filter(type == "folder",
+                      name == "Psorcast Psoriasis Draw Images") %>% .$id
     ref_list$ppacman <- data %>% 
         dplyr::filter(
             analysisType == "clinical data",
@@ -70,7 +76,7 @@ get_feature_extraction_ids <- function(){
 }
 
 
-get_curated_features_ids <- function(){
+get_feature_processing_ids <- function(){
     file_view_id <- get_file_view_ref()
     ref_list <- list()
     data <- synTableQuery(
@@ -79,7 +85,7 @@ get_curated_features_ids <- function(){
         tibble::as_tibble()
     ref_list$parent_id <- data %>%
         dplyr::filter(type == "folder",
-                      name == "Curated Features") %>% .$id
+                      name == "Features - Processed") %>% .$id
     ref_list$merged <- data %>%
         dplyr::filter(analysisType == "merged feature files",
                       pipelineStep == "feature curation") %>% .$id
@@ -98,7 +104,7 @@ get_modelling_results_ids <- function(){
     ref_list <- list(
         parent_id = data %>% 
             dplyr::filter(type == "folder",
-                          name == "Model Performance") %>% .$id,
+                          name == "Intermediate Files") %>% .$id,
         psa_pso_md_fpr_tpr = data %>% 
             dplyr::filter(analysisType == "digital jar open",
                           analysisSubtype == "psa vs pso - median iter",

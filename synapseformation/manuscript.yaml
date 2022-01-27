@@ -1,4 +1,4 @@
-- name: Psorcast - Manuscript - Test
+- name: Psorcast In-Clinic Validation - Public Release
   type: Project
   acl:
   - principal_id: 3394042 # Aryton Tediarjo
@@ -14,14 +14,14 @@
   children:
   - name: Figures
     type: Folder
-  - name: Features
+  - name: Features - Extracted
+    type: Folder
+    children:
+      - name: Psorcast Annotator Scores
+        type: folder
+  - name: Features - Processed
     type: Folder
   - name: Intermediate Files
     type: Folder
-    children:
-      - name: Curated Features
-        type: Folder
-      - name: Model Performance
-        type: Folder
   - name: Removed Data Log
     type: Folder
