@@ -41,4 +41,4 @@ docker exec -it <CONTAINER_ID> make rerun
 ```
 
 ## Contributing Docs:
-Contribution to the repository will be documented in this Github Page
+Guidelines to contribute to this Github Repository will be documented in [`/docs`](https://github.com/Sage-Bionetworks/psorcast-validation-manuscript/tree/main/docs)
