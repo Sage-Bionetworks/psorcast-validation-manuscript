@@ -1,4 +1,4 @@
-- name: Psorcast In-Clinic Validation - Public Release
+- name: Psorcast - Manuscript - Test
   type: Project
   acl:
   - principal_id: 3394042 # Aryton Tediarjo
@@ -19,6 +19,8 @@
     children:
       - name: Psorcast Annotator Scores
         type: folder
+      - name: Psorcast Psoriasis Draw Images
+        type: folder  
   - name: Features - Processed
     type: Folder
   - name: Intermediate Files
