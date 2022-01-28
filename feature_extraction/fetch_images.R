@@ -25,6 +25,7 @@ library(readr)
 library(png)
 library(jpeg)
 source('utils/helper_utils.R')
+source('utils/fetch_id_utils.R')
 source('utils/feature_extraction_utils.R')
 synapser::synLogin()
 
@@ -32,10 +33,16 @@ synapser::synLogin()
 ##############################
 # Global Variables
 ##############################
+SYN_ID_REF <- get_feature_extraction_ids()
+ANNOTATIONS <- list(
+    pipelineStep = "feature extraction",
+    analysisType = "psoriasis draw",
+    analysisSubtype = "psoriasis draw images"
+)
 DATA_REF <- list(
     psorcast_draw = list(
-        syn_id = "syn22281746",
-        parent = "syn26954544",
+        syn_id = config::get("tables")$psoriasis_draw,
+        parent = SYN_ID_REF$pso_draw_folder_id,
         file_columns = c("summaryImage.png", "summaryImage.jpg"),
         marker = "psoDraw"
     )
@@ -89,7 +96,11 @@ generate_mapping_summary <- function(data, output_id){
 #' @param parent provenance param for 'parent'
 #' @param executed provenance param for 'executed'
 #' @return
-create_manifest <- function(data, used, parent, executed){
+create_manifest <- function(data, used, parent, executed, annotation_list){
+    for(annotation in names(annotation_list)){
+        data <- data %>%
+            dplyr::mutate(!!sym(annotation) := annotation_list[[annotation]])
+    }
     data %>%
         dplyr::mutate(
             parent = parent,
@@ -101,7 +112,8 @@ create_manifest <- function(data, used, parent, executed){
                       executed, 
                       recordId, 
                       participantId, 
-                      createdOn)
+                      createdOn,
+                      all_of(names(annotation_list)))
 }
 
 #' wrapper function to upload manifest using syncToSynapse
@@ -177,17 +189,10 @@ main <- function(){
             create_manifest(
                 used = data_filter$syn_id,
                 executed = GIT_URL,
-                parent = data_filter$parent)}) %>%
+                parent = data_filter$parent,
+                annotation_list = ANNOTATIONS)}) %>%
         purrr::reduce(bind_rows) %>%
-        sync_manifest() %>%
-        save_to_synapse(
-            data = .,
-            output_filename = OUTPUT_FILE,
-            parent = SUMMARY_TBL_OUTPUT_PARENT_ID, 
-            name = "get summary table from images",
-            executed = GIT_URL,
-            used = all_used_ids
-        )
+        sync_manifest()
 }
 
 log_process(main(), SCRIPT_PATH)

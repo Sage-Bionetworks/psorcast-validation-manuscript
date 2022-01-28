@@ -1,13 +1,13 @@
 rerun: update logs project clinical features analyses plots
 
+authenticate:
+	Rscript utils/authenticate.R ${PARAMS}
+
 update:
 	git pull
 
 logs:
 	mkdir logs
-	
-authenticate:
-	Rscript utils/authenticate.R ${PARAMS}
 	
 project:
 	. env/bin/activate && python3 synapseformation/create_project.py
@@ -20,6 +20,8 @@ features:
 	Rscript feature_extraction/psoriasis_draw_bsa_features.R || exit 1
 	Rscript feature_extraction/digitalJarOpen_rotation_features.R || exit 1
 	Rscript feature_extraction/jointSummaries_features.R || exit 1
+	Rscript feature_extraction/fetch_images.R || exit 1
+	Rscript feature_extraction/copy_annotator_scores.R || exit 1
 	
 
 analyses:
