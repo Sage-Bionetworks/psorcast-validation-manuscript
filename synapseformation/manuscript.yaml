@@ -18,9 +18,9 @@
     type: Folder
     children:
       - name: Psorcast Annotator Scores
-        type: folder
-      - name: Psorcast Psoriasis Draw Images
-        type: folder  
+        type: Folder
+        name: Psorcast Psoriasis Draw Images
+        type: Folder  
   - name: Features - Processed
     type: Folder
   - name: Intermediate Files
