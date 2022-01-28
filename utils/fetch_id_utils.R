@@ -56,7 +56,8 @@ get_feature_extraction_ids <- function(){
     ref_list$draw <- data %>% 
         dplyr::filter(
             analysisType == "psoriasis draw",
-            pipelineStep == "feature extraction") %>% .$id
+            pipelineStep == "feature extraction",
+            is.na(analysisSubtype)) %>% .$id
     ref_list$dig_jc <-  data %>% 
         dplyr::filter(
             analysisType == "joint counts analysis",
